@@ -5,11 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock title %}</title>
-    
+    <link rel="stylesheet" href="{% static 'core/css/core.css' %}">
+    {% block css %}{% endblock css %}
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
-    <h1>Base</h1>
+    <header id="main-navigation">
+        <h1><a href="#">Atul Blog</a></h1>
+        <nav>
+            <a href="{% url 'all-posts-page' %}">All posts</a>
+        </nav>
+    </header>
+
+   
+    {% block content %} {% endblock content %}
 </body>
 </html>
