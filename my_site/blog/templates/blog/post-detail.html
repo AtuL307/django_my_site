@@ -10,9 +10,15 @@
     <section id="summary">
         
         <h2>{{ post.title }}</h2>
+        <div>
+            {% for tg in post_tag %}
+                <span class="tag">{{ tg.caption }}</span>
+            {% endfor %}
+
+        </div>
         <article>
-            <img src="{% static 'core/images/'|add:post.image %}" alt="{{ post.title }}" >
-            <address>{{post.author|capfirst}}</address>
+            <img src="{% static 'core/images/'|add:post.image_name %}" alt="{{ post.title }}" >
+            <address>By <a href="mailto: {{ post.author.email_address }}">{{post.author|capfirst}}</a></address>
             <div>
                 Last update on <time>{{ post.date|date:'D d F Y' }}</time>
             </div>
@@ -20,7 +26,7 @@
     </section>
     <main>
         <p>
-            {{ post.contain|linebreaks }}
+            {{ post.content|linebreaks }}
         </p>
     </main>
 
