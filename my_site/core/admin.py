@@ -15,7 +15,7 @@ class AuthorAdmin(admin.ModelAdmin):
 @admin.register(Post)    
 class PostAdmin(admin.ModelAdmin):
     list_display = ["title","slug", "author", "date","images"]
-   #field = ["title", "slug","excerpt", "image_name", "date", "content", "tag"]
+    # field = ["title", "slug","excerpt", "image_name", "date", "content", "tag"]
     list_filter = ["author", "tag", "date"]
     filter_horizontal= [("tag"),]
     prepopulated_fields = {"slug": ["title"]}

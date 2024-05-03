@@ -6,7 +6,7 @@ from core.models import Post
 @require_http_methods(["GET"])
 def blog_posts(req):
     try:
-        all_posts = Post.objects.all()
+        all_posts = Post.objects.all().order_by("-date")[:3]
         return render(req,'blog/all-posts.html', {'all_posts':all_posts})
         
     except Exception as err:
