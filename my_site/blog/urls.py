@@ -12,6 +12,7 @@ urlpatterns = [
   # Class view
     path('posts/',class_views.AllBlogPostsListView.as_view(), name='all-posts-page'),
     path('posts/<slug:slug>/', class_views.PostDetailView.as_view(), name='postDetail-page'),
+    path('read-later/',class_views.ReadLaterView.as_view(), name="read-later"),
     
 ]
  

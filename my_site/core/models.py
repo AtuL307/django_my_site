@@ -34,3 +34,13 @@ class Post(models.Model):
     
     def __str__(self):
         return f"{self.title} {self.images} {self.date} {self.slug}"
+
+class Comment(models.Model):
+    
+    user_name = models.CharField(max_length=120, verbose_name='User Name')
+    user_email = models.EmailField(max_length=254, verbose_name='User Email')
+    text = models.TextField(max_length=400, verbose_name='Comment')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    
+    def __str__(self):
+        return f"{self.user_name} {self.user_email} {self.text}"
