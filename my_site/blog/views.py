@@ -1,11 +1,23 @@
-from django.shortcuts import render
-from core.views import all_posts
+from django.shortcuts import render, get_object_or_404
+from django.views.decorators.http import require_http_methods
+from django.http import HttpResponse
+from core.models import Post
 
-print(all_posts)
+@require_http_methods(["GET"])
 def blog_posts(req):
-    return render(req,'blog/all-posts.html', {'all_posts':all_posts})
-
+    try:
+        all_posts = Post.objects.all().order_by("-date")[:3]
+        return render(req,'blog/all-posts.html', {'all_posts':all_posts})
+        
+    except Exception as err:
+        pass
+    
+@require_http_methods(["GET"])
 def post_details(req, slug):
-    for post in all_posts:
-        if post['slug'] == slug:
-            return render(req, 'blog/post-detail.html', {'post':post})
+    try:
+        post = get_object_or_404(Post, slug = slug)
+        post_tag = post.tag.all() 
+        return render(req, 'blog/post-detail.html', {'post':post, "post_tag": post_tag })
+    except Exception as err:
+            return HttpResponse(err)
+   

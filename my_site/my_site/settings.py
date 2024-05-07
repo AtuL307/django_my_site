@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'core',
     'blog',
 ]
@@ -128,3 +129,7 @@ STATICFILES_DIR = [STATIC_DIR]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Media Files
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'uploads')
+MEDIA_URL = "/posts-media-files/"
