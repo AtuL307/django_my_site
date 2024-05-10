@@ -83,10 +83,11 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': getenv("DB_NAME"),
-        'USER': getenv("DB_USER"),
-        'PASSWORD': getenv("DB_PASSWORD"),
-        'PORT': getenv("DB_PORT"),
+        'NAME': getenv("AWS_DB_NAME"),
+        'USER': getenv("AwS_DB_USER"),
+        'PASSWORD': getenv("AWS_DB_PASSWORD"),
+        'HOST': getenv("AES_DB_HOST"),
+        'PORT': getenv("AWS_DB_PORT"),
     }
 }
 
