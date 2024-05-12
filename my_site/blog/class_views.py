@@ -11,7 +11,7 @@ from .helper_func import data_fetch, session_stored_post
 
 class AllBlogPostsListView(ListView):
     model = Post
-    queryset = Post.objects.all().order_by("-date")[:3]
+    queryset = Post.objects.all().order_by("-date")
     context_object_name = 'all_posts'
     template_name='blog/all-posts.html'
 
