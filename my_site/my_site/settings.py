@@ -85,11 +85,11 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': getenv("AWS_DB_NAME"),
-        'USER': getenv("AWS_DB_USER"),
-        'PASSWORD': getenv("AWS_DB_PASSWORD"),
-        'HOST': getenv("AWS_DB_HOST"),
-        'PORT': getenv("AWS_DB_PORT"),
+        'NAME': getenv("DB_NAME"),
+        'USER': getenv("DB_USER"),
+        'PASSWORD': getenv("DB_PASSWORD"),
+        # 'HOST': getenv("AWS_DB_HOST"),
+        'PORT': getenv("DB_PORT"),
     }
 }
 
@@ -149,12 +149,12 @@ DEFAULT_FILE_STORAGE = 'hello_django.storage_backends.PublicMediaStorage'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-    # STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles')
-    # STATIC_URL = '/static/'
+# STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles')
+# STATIC_URL = '/static/'
     
 # Media Files
-    # MEDIA_ROOT = Path.joinpath(BASE_DIR, 'uploads')
-    # MEDIA_URL = "/posts-media-files/"       
+# MEDIA_ROOT = Path.joinpath(BASE_DIR, 'uploads')
+# MEDIA_URL = "/posts-media-files/"       
     
 STATICFILES_DIR = [STATIC_DIR]
 # Default primary key field type

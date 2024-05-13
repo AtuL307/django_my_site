@@ -1,8 +1,9 @@
 from core.models import Post
-from core.forms import CommentForm
+from core.forms import CommentForm, PostForm, TagForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.text import slugify
 from django.db.models.base import Model as Model
 from django.views.generic import ListView
 from django.views import View
@@ -17,7 +18,6 @@ class AllBlogPostsListView(ListView):
 
 class PostDetailView(View):
 
-    
     def get(self, request, slug):
         post = get_object_or_404(Post, slug = slug)
         comment_form = CommentForm()   
@@ -75,5 +75,41 @@ class ReadLaterView(View):
         
         request.session["stored_post"] = stored_post
 
-        return HttpResponseRedirect("/")  
+        return HttpResponseRedirect(reverse("all-posts-page"))  
     
+    
+class AddPostView(View):
+    def get(self, request):
+        post_form = PostForm()
+        return render(request, 'blog/add_post.html', context={"post_form": post_form})
+
+    def post(self, request):
+        post_form = PostForm(request.POST, request.FILES)
+        
+        if post_form.is_valid():
+            post = post_form.save(commit=False)  
+            post.slug = slugify(post.title)
+            post.save()
+            return HttpResponseRedirect(reverse("all-posts-page"))
+
+        else:
+            post_form = PostForm()
+            return render(request, 'blog/add_post.html', context={"post_form": post_form})
+
+class AddTagView(View):
+    
+    def get(self, request):
+        tag_form = TagForm()
+        return render(request, 'blog/tag.html', context={"tag_form": tag_form} )
+
+    def post(self, request):
+        tag_form = TagForm(request.POST)
+        
+        if tag_form.is_valid():
+            tag_form.save()
+            return HttpResponseRedirect(reverse("add-post"))
+        else:
+            
+            tag_form = TagForm()
+            return render(request, 'blog/tag.html', context={"tag_form": tag_form} )
+      
