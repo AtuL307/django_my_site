@@ -25,10 +25,10 @@ STATIC_DIR = Path.joinpath(BASE_DIR, 'static')
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = getenv("SECRET_KEY")
+SECRET_KEY = "django-insecure-h@%3pk+09(+-$$0(=9)$5g(kvjs2f=d7q2!l3^@iv&esc6w$b3"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv("DEBUG")
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -85,11 +85,11 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': getenv("AWS_DB_NAME"),
-        'USER': getenv("AWS_DB_USER"),
-        'PASSWORD': getenv("AWS_DB_PASSWORD"),
-        'HOST': getenv("AWS_DB_HOST"),
-        'PORT': getenv("AWS_DB_PORT"),
+        'NAME': "mysite",
+        'USER': "Mysite",
+        'PASSWORD': "Mysite2024",
+        'HOST': "mysite-backend.c3c0se6kagou.ap-south-1.rds.amazonaws.com",
+        'PORT': "3306",
     }
 }
 
@@ -125,10 +125,10 @@ USE_I18N = True
 USE_TZ = True
 
 # S3 setting
-AWS_ACCESS_KEY_ID = getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = getenv('AWS_S3_REGION_NAME')
+AWS_ACCESS_KEY_ID = "AKIATCKAM5LONZWQQMHT"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_STORAGE_BUCKET_NAME = "blog-mysite"
+AWS_S3_REGION_NAME = "ap-south-1"
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_DEFAULT_ACL = None
 AWS_S3_FILE_OVERWRITE = False
