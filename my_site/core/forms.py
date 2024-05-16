@@ -1,5 +1,5 @@
 from django import forms
-from . models import Comment, Post, Tag
+from . models import Comment, Post, Author, Tag
 
 class TagForm(forms.ModelForm):
     
@@ -9,6 +9,17 @@ class TagForm(forms.ModelForm):
         labels ={
             "caption" : "Your Favorite Tag"
         }
+class AuthorForm(forms.ModelForm):
+    
+    class Meta:
+        model = Author
+        fields = "__all__"
+        labels = {
+            "first_name" : "First Name",
+            "last_name" : "Last Name",
+            "email_address" : "Email",
+        }
+
 
 class PostForm(forms.ModelForm):
     class Meta:

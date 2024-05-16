@@ -1,5 +1,3 @@
-from typing import Any
-from django.db.models.query import QuerySet
 from .models import Post
 from django.views.generic.list import ListView
     

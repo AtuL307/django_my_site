@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.core.validators import MinLengthValidator
-from my_site.storage_backends import MediaStorage
+# from my_site.storage_backends import MediaStorage
 
 class Tag(models.Model):
     caption = models.CharField(max_length= 20)
@@ -25,7 +25,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=150)
     excerpt = models.CharField(max_length=200)
-    images = models.ImageField(upload_to='posts', storage=MediaStorage, null=True)
+    images = models.ImageField(upload_to='posts', null=True)
     date = models.DateField(auto_now=True)
     slug = models.SlugField(unique=True, db_index=True)
     content = models.TextField(validators=[MinLengthValidator(10)])

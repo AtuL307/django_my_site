@@ -1,5 +1,5 @@
 from core.models import Post
-from core.forms import CommentForm, PostForm, TagForm
+from core.forms import CommentForm, PostForm,AuthorForm, TagForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
@@ -112,4 +112,11 @@ class AddTagView(View):
             
             tag_form = TagForm()
             return render(request, 'blog/tag.html', context={"tag_form": tag_form} )
-      
+        
+class AuthorView(View):
+    def get(self, request):
+        author_form = AuthorForm()
+        return render(request, 'blog/add_post.html', context={"author_form": author_form})
+
+    def post(self, request, *args, **kwargs):
+        return HttpResponse('POST request!')

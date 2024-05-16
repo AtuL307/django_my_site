@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Add Author{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'blog/css/add_author.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+    {{author_form}}
+{% endblock content %}
