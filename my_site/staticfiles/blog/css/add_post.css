@@ -45,7 +45,8 @@ body {
 }
 
 .form-control input,
-.form-control textarea {
+.form-control textarea, 
+.form-control select {
     display: block;
     width: 100%;
     font: inherit;
@@ -88,8 +89,6 @@ body {
     padding: 0.25rem 1.5rem;
     border-radius: 6px;
 }
-
-
 
 #add_tag{
     margin: 3rem auto;

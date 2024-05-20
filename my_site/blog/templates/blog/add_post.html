@@ -10,6 +10,13 @@
 {% block content %}
     <section id="add_post-form">
         <h2>Add New Post</h2>
+        
+        {% if error %}
+            <div id="alert">
+                <h3>{{ error|slice:"8:24" }} {{ post_title|upper }}</h3>
+            </div>
+        {% endif %}
+        
 
         <form action="{% url "add-post" %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'django_ses',
     'whitenoise.runserver_nostatic',
     'storages',
     'core',
@@ -126,7 +127,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-# # S3 setting
+######## S3 setting ########
 # AWS_ACCESS_KEY_ID = getenv('AWS_ACCESS_KEY_ID')
 # AWS_SECRET_ACCESS_KEY = getenv('AWS_SECRET_ACCESS_KEY')
 # AWS_STORAGE_BUCKET_NAME = getenv('AWS_STORAGE_BUCKET_NAME')
@@ -138,7 +139,7 @@ USE_TZ = True
 # AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# # s3 static settings
+######## s3 static settings ########
 # STATIC_LOCATION = 'staticfile'
 # STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
 # STATICFILES_STORAGE = 'my_site.storage_backends.StaticStorage'
@@ -163,3 +164,20 @@ STATICFILES_DIR = [STATIC_DIR]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+######### Email SMTP Configuration ##########
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_USE_SSL = False
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD")
+
+######### Email AWS SES Configuration ##########
+EMAIL_BACKEND = 'django_ses.SESBackend'
+AWS_ACCESS_KEY_ID = 'AKIATCKAM5LOJUV4G47Q'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_SES_REGION_NAME = 'ap-south-1'
+AWS_SES_REGION_ENDPOINT = 'email.ap-south-1.amazonaws.com'
+EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")

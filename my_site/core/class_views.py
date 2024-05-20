@@ -12,5 +12,5 @@ class IndexPageListView(ListView):
     def get_queryset(self):
         query =  super().get_queryset()   
         data = query[:3]
-        print(data)
+        # print(data)
         return data

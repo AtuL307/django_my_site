@@ -1,4 +1,7 @@
-from core.models import Post
+import blog.signals
+
+from core.models import Post, Author
+from django.db import IntegrityError
 from core.forms import CommentForm, PostForm,AuthorForm, TagForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -87,15 +90,50 @@ class AddPostView(View):
         post_form = PostForm(request.POST, request.FILES)
         
         if post_form.is_valid():
+            
             post = post_form.save(commit=False)  
-            post.slug = slugify(post.title)
-            post.save()
+            post.slug = slugify(post.title)                 
+          
+            try:
+                post.save()
+                
+            except IntegrityError as err:
+                print("Data could not be saved due to IntegrityError:", err)
+                return render(request, 'blog/add_post.html', context={"post_form": post_form, "error": str(err), "post_title": post.title})            
+
+                    
             return HttpResponseRedirect(reverse("all-posts-page"))
 
         else:
             post_form = PostForm()
             return render(request, 'blog/add_post.html', context={"post_form": post_form})
 
+
+class AuthorView(View):
+    def get(self, request):
+        author_form = AuthorForm()
+        return render(request, 'blog/add_author.html', context={"author_form": author_form})
+
+    def post(self, request, *args, **kwargs):
+        author_form = AuthorForm(request.POST)
+        
+        if author_form.is_valid():
+            
+            try:                
+                
+                author_form.save() # This will trigger the "post_save" signal to function "author_send_verification_mail"
+                
+            except IntegrityError as err:
+                print("Data could not be saved due to IntegrityError:", err)
+     
+        else:
+            author_form = AuthorForm()
+            return render(request, 'blog/add_author.html', context={"author_form": author_form})
+        
+     
+        return HttpResponseRedirect(reverse("add-post"))
+    
+    
 class AddTagView(View):
     
     def get(self, request):
@@ -112,11 +150,3 @@ class AddTagView(View):
             
             tag_form = TagForm()
             return render(request, 'blog/tag.html', context={"tag_form": tag_form} )
-        
-class AuthorView(View):
-    def get(self, request):
-        author_form = AuthorForm()
-        return render(request, 'blog/add_post.html', context={"author_form": author_form})
-
-    def post(self, request, *args, **kwargs):
-        return HttpResponse('POST request!')

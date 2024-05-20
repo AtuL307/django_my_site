@@ -1,6 +1,7 @@
 {% extends "core/base.html" %}
 {% load static %}
 
+
 {% block title %}Add Author{% endblock title %}
 
 {% block css %}
@@ -9,5 +10,42 @@
 
 {% block content %}
 
-    {{author_form}}
+    <section id="add_author-form">
+        <h2>Add New Author</h2>
+        <!-- <div id="mail">
+
+        </div> -->
+        <h3 id="mail"></h3>
+        <form action="{% url "add-author" %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for form_field in author_form  %}
+                <div class="form-control {% if form_field.erros %}invalid{% endif %}">
+                    {{ form_field.label_tag}}
+                    {{ form_field}}
+                    {{ form_field.errors }}
+                </div>
+            {% endfor %}                
+            <button onclick="email_send()">Save Author</button>
+        </form>
+    </section>
+
 {% endblock content %}
+
+
+{% block script %}
+
+    <!-- <script src="{% static 'blog/js/add_author_mail.js' %}"></script> -->
+    <script>
+
+        function email_send() {
+            // document.getElementById("mail").innerHTML = "Verification email is send on your email address !"
+            alert("Verification email is send on your email address !");
+            // const para = document.createElement("h2");
+            // const node = document.createTextNode("Verification email is send on your email address !");
+            //     para.appendChild(node)
+            // const element = document.getElementById("mail");
+            //     element.appendChild(para);
+        }
+    </script>
+    
+{% endblock script %}

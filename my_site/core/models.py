@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib import admin
 from django.core.validators import MinLengthValidator
 # from my_site.storage_backends import MediaStorage
+# from django.db.models.signals import post_save, post_delete
+
 
 class Tag(models.Model):
     caption = models.CharField(max_length= 20)

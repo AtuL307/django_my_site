@@ -19,4 +19,3 @@ def data_fetch(post, comment_form, is_saved_for_later):
         "saved_for_later" : is_saved_for_later,
     }
     return context
-
