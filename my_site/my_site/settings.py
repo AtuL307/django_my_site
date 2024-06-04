@@ -166,18 +166,28 @@ STATICFILES_DIR = [STATIC_DIR]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ######### Email SMTP Configuration ##########
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-# EMAIL_HOST = "smtp.gmail.com"
-# EMAIL_USE_SSL = False
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
-# EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD")
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD")
 
 ######### Email AWS SES Configuration ##########
-EMAIL_BACKEND = 'django_ses.SESBackend'
-AWS_ACCESS_KEY_ID = 'AKIATCKAM5LOJUV4G47Q'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_SES_REGION_NAME = 'ap-south-1'
-AWS_SES_REGION_ENDPOINT = 'email.ap-south-1.amazonaws.com'
-EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
+# EMAIL_BACKEND = 'django_ses.SESBackend'
+# AWS_ACCESS_KEY_ID = 'AKIATCKAM5LOJUV4G47Q'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_SES_REGION_NAME = 'ap-south-1'
+# AWS_SES_REGION_ENDPOINT = 'email.ap-south-1.amazonaws.com'
+# EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
+
+
+######### Session Configuration ##########
+# Session engine (default is database-backed sessions)
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# Ensure session cookies are correctly configured
+SESSION_COOKIE_NAME = 'sessionid'
+SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+SESSION_COOKIE_HTTPONLY = True

@@ -7,7 +7,7 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-#add_author-form {
+#change_pass-form {
     margin: 7rem auto;
     margin-bottom: 2rem;
     width: 90%;
@@ -18,7 +18,8 @@ body {
     padding: 1rem;
 }
 
-#add_author-form button {
+#change_pass-form button{
+
     font: inherit;
     background-color: #390281;
     color: white;
@@ -28,10 +29,15 @@ body {
     cursor: pointer;
 }
 
-#add_author-form button:hover,
-#add_author-form button:active {
+#change_pass-form button:hover,
+#change_pass-form button:active{
     background-color: #4f0ba7;
     border-color: #4f0ba7;
+}
+
+#change_pass-form button a{
+    text-decoration: none;
+    color: white;
 }
 
 .form-control {
@@ -52,4 +58,6 @@ body {
     border-radius: 6px;
     border: 1px solid #ccc;
 }
+
+
 

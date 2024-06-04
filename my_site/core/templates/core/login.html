@@ -1,0 +1,55 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Sign In{% endblock title %}
+
+{% block css %}
+
+    <link rel="stylesheet" href="{% static 'core/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/includes/alert.css' %}">
+
+{% endblock css %}
+
+{% block content %}
+<section id="signin-form">
+    <h2>Log In</h2>
+    <div>
+        {% if messages %}
+                {% for message in messages %}
+                    <h5 {% if message.tags %}class="message_{{message.tags}}" {% endif %} 
+                        {% if message.tags == "error" %}
+                            style="color: #d6000b;"
+                        {% else %}
+                            style="color: #28a745;"
+                        {% endif %} >
+                        
+                        {{message}}
+                    </h5>
+                {% endfor %}
+        {% endif %}
+    </div>
+
+    {{ sign_in_form.non_field_errors}}
+    
+    <form action="{% url 'sign-in' %}" method="POST" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {% for form_field in sign_in_form %}
+            <div class="form-control {% if form_field.errors %}invalid{% endif %} border-0">
+                
+                {{ form_field.label_tag}}
+                {{ form_field}}
+                {{ form_field.errors }}
+
+            </div>
+        {% endfor %}      
+        
+        <div class="text-center">
+            <p>Forgot your password <a href="{% url 'password-reset' %}" style="color:#cf79f1;">Reset Password</a></p>
+            <p>Don't have a account? <a href="{%url 'sign-up'%}" style="color:#cf79f1;">Join Now</a></p>
+            <button class="btn">login</button>
+        </div>
+
+    </form>
+
+</section>
+{% endblock content %}

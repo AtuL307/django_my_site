@@ -7,7 +7,7 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-#add_author-form {
+#profile-form {
     margin: 7rem auto;
     margin-bottom: 2rem;
     width: 90%;
@@ -17,8 +17,16 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     padding: 1rem;
 }
+#profile-form a {
+    text-decoration: none;
+    color: black;
+}
+#profile-form a:hover{
+    color: #390281;
+}
 
-#add_author-form button {
+#profile-form button{
+
     font: inherit;
     background-color: #390281;
     color: white;
@@ -28,10 +36,15 @@ body {
     cursor: pointer;
 }
 
-#add_author-form button:hover,
-#add_author-form button:active {
+#profile-form button:hover,
+#profile-form button:active{
     background-color: #4f0ba7;
     border-color: #4f0ba7;
+}
+
+#profile-form button a{
+    text-decoration: none;
+    color: white;
 }
 
 .form-control {
@@ -52,4 +65,3 @@ body {
     border-radius: 6px;
     border: 1px solid #ccc;
 }
-

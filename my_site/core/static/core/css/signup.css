@@ -7,7 +7,7 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-#add_author-form {
+#signup-form {
     margin: 7rem auto;
     margin-bottom: 2rem;
     width: 90%;
@@ -18,7 +18,7 @@ body {
     padding: 1rem;
 }
 
-#add_author-form button {
+#signup-form button {
     font: inherit;
     background-color: #390281;
     color: white;
@@ -28,14 +28,15 @@ body {
     cursor: pointer;
 }
 
-#add_author-form button:hover,
-#add_author-form button:active {
+#signup-form button:hover,
+#signup-form button:active {
     background-color: #4f0ba7;
     border-color: #4f0ba7;
 }
 
 .form-control {
-    margin-bottom: 1rem;        
+    margin-bottom: 1rem; 
+    border: none
 }
 
 .form-control label {
@@ -52,4 +53,5 @@ body {
     border-radius: 6px;
     border: 1px solid #ccc;
 }
+
 

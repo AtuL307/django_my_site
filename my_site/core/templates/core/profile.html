@@ -1,0 +1,44 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}My Account{% endblock title %}
+
+{% block css %}
+
+    <link rel="stylesheet" href="{% static 'core/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/includes/alert.css' %}">
+
+{% endblock css %}
+
+
+{% block content %}
+    <section id="profile-form">
+        <h2>Profile</h2>
+        <div>
+            {% if messages %}
+                    {% for message in messages %}
+                        <h3 {% if message.tags %}class="message_{{message.tags}}" {% endif %} 
+                            {% if message.tags == "error" %}
+                                style="color: #d6000b;"
+                            {% else %}
+                                style="color: #28a745;"
+                            {% endif %}  >{{message}}
+                        </h3>
+                    {% endfor %}
+            {% endif %}
+        </div>
+
+        <form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {% for form_field in profile_form  %}
+                <div class="form-control {% if form_field.errors %}invalid{% endif %} border-0">
+                    
+                    {{ form_field.label_tag}}
+                    {{ form_field}}
+                    {{ form_field.errors }}
+    
+                </div>
+            {% endfor %}
+            <button >Save</button>
+    </section>
+{% endblock content %}

@@ -2,9 +2,9 @@
 {% load static %}
 
 {% block title %} My Stored Posts {% endblock title %}
+
 {% block css %}
     <link rel="stylesheet" href="{% static 'blog/css/store_post.css' %}">
-
 {% endblock css %}
 
 {% block content %}
@@ -12,7 +12,7 @@
         {% if has_posts %}
             <ul>
                 {% for post in posts  %}
-                    <li><a href="{% url "postDetail-page" post.slug %}">{{post.title}}</a></li>
+                    <li><a href="{% url 'postDetail-page' post.slug %}">{{post.title}}</a></li>
                 {% endfor %}
             </ul>
 

@@ -6,46 +6,44 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'blog/css/add_author.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/includes/alert.css' %}">
+
 {% endblock css %}
 
 {% block content %}
 
-    <section id="add_author-form">
-        <h2>Add New Author</h2>
-        <!-- <div id="mail">
 
-        </div> -->
-        <h3 id="mail"></h3>
-        <form action="{% url "add-author" %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for form_field in author_form  %}
-                <div class="form-control {% if form_field.erros %}invalid{% endif %}">
-                    {{ form_field.label_tag}}
-                    {{ form_field}}
-                    {{ form_field.errors }}
-                </div>
-            {% endfor %}                
-            <button onclick="email_send()">Save Author</button>
-        </form>
+    <section>
+        {% if author_form.errors %}
+            <div id="alert">
+                <h2>Saving the author failed!</h2>
+                <p>Please check the author form below.</p>
+                <a href="#add_author-form" >Fix!</a>
+            </div>
+        {% endif %}
     </section>
 
+    <section id="add_author-form">
+        <h2>Add New Author</h2>
+        <h3 id="mail"></h3>
+        <form id="author" action="{% url 'add-author' %}" method="POST" enctype="multipart/form-data " novalidate>
+            {% csrf_token %}
+            {% for form_field in author_form  %}
+                <div class="form-control {% if form_field.errors %}invalid{% endif %} border-0">
+                    {{ form_field.label_tag}}
+                    {{ form_field}}
+                    {{ form_field.errors }} 
+                </div>
+            {% endfor %}                
+            <button type="submit" class="btn">Save Author</button>
+        </form>
+    </section>
+    <p id="demo"></p>
 {% endblock content %}
 
 
 {% block script %}
 
-    <!-- <script src="{% static 'blog/js/add_author_mail.js' %}"></script> -->
-    <script>
-
-        function email_send() {
-            // document.getElementById("mail").innerHTML = "Verification email is send on your email address !"
-            alert("Verification email is send on your email address !");
-            // const para = document.createElement("h2");
-            // const node = document.createTextNode("Verification email is send on your email address !");
-            //     para.appendChild(node)
-            // const element = document.getElementById("mail");
-            //     element.appendChild(para);
-        }
-    </script>
+    <script src="{% static 'blog/js/add_author.js' %}"></script>
     
 {% endblock script %}

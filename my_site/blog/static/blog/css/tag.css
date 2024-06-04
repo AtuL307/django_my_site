@@ -8,7 +8,7 @@ body {
 }
 
 #tag-form {
-    margin: 8rem auto;
+    margin: 6rem auto;
     width: 90%;
     max-width: 40rem;
     border-radius: 12px;
@@ -51,3 +51,5 @@ body {
     border-radius: 6px;
     border: 1px solid #ccc;
 }
+
+ 

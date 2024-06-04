@@ -5,9 +5,21 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'blog/css/add_post.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/includes/alert.css' %}">
+
 {% endblock css %}
 
 {% block content %}
+
+    <section>
+        {% if post_form.errors %}
+            <div id="alert">
+                <h2>Saving the post failed!</h2>
+                <p>Please check the post form below.</p>
+                <a href="#add_post-form" >Fix!</a>
+            </div>
+        {% endif %}
+    </section>
     <section id="add_post-form">
         <h2>Add New Post</h2>
         
@@ -18,10 +30,10 @@
         {% endif %}
         
 
-        <form action="{% url "add-post" %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'add-post' %}" method="POST" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             {% for form_field in post_form  %}
-                <div class="form-control {% if form_field.erros %}invalid{% endif %}">
+                <div class="form-control {% if form_field.errors %}invalid{% endif %} border-0">
                     {{ form_field.label_tag}}
                     {{ form_field}}
                     {{ form_field.errors }}
@@ -32,8 +44,8 @@
     </section>
 
     <section id="add_tag">
-        <div "form-control">
-            <button><a href="{% url "add-tag" %}">Add new tag</a></button>
+        <div class="form-control border-0">
+            <button><a href="{% url 'add-tag' %}">Add new tag</a></button>
         </div>
     </section>
 {% endblock content %}

@@ -5,15 +5,28 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'blog/css/tag.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/includes/alert.css' %}">
+
 {% endblock css %}
 
 {% block content %}
+
+    <section>
+        {% if tag_form.errors %}
+            <div id="alert">
+                <h2>Saving the tag failed!</h2>
+                <p>Please check the tag form below.</p>
+                <a href="#tag-form" >Fix!</a>
+            </div>
+        {% endif %}
+    </section>
+
     <section id="tag-form">
         <h2>Tag</h2>
-        <form action="{% url "add-tag" %}" method="POST">
+        <form action="{% url 'add-tag' %}" method="POST" novalidate>
             {% csrf_token %}
             {% for form_field in tag_form  %}
-                <div class="form-control  {% if form_field.erros %}invalid{% endif %}">
+                <div class="form-control {% if form_field.errors %}invalid{% endif %} border-0">
                     {{ form_field.label_tag }}
                     {{ form_field }}
                     {{ form_field.errors }}

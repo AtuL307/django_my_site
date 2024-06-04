@@ -3,20 +3,15 @@
 {% block title %} {{ post.title }} {% endblock title %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'blog/css/post_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/includes/alert.css' %}">
+
 {% endblock css %}
 
 {% block content %} 
     <section id="summary">
         
         <h2>{{ post.title }}</h2>
-        {% if comment_form.errors %}
-        <div id="alert">
-            <h2>Saving the comment failed!</h2>
-            <p>Please check the comment form below.</p>
-            <a href="#comment-form" >Fix!</a>
-        </div>
-        {% endif %}
-    
+
         <div>
             {% for tg in post_tag %}
                 <span class="tag">{{ tg.caption }}</span>
@@ -25,7 +20,7 @@
         </div>
 
         <div id="read-later">
-            <form action="{% url "read-later" %}" method="POST">
+            <form action="{% url 'read-later' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="post_id" value="{{ post.id }}">
                 <button>
@@ -64,12 +59,22 @@
         </ul>
     </section>
 
+    <section>
+        {% if comment_form.errors %}
+            <div id="alert">
+                <h2>Saving the comment failed!</h2>
+                <p>Please check the comment form below.</p>
+                <a href="#comment-form" >Fix!</a>
+            </div>
+        {% endif %}
+    </section>
+
     <section id="comment-form">
         <h2>Your Comment</h2>
-        <form  action="{% url 'postDetail-page' post.slug %}" method="POST">
+        <form  action="{% url 'postDetail-page' post.slug %}" method="POST" novalidate>
             {% csrf_token %}
             {% for form_field in comment_form  %}
-                <div class="form-control {% if form_field.erros %}invalid{% endif %}">
+                <div class="form-control {% if form_field.errors %}invalid{% endif %} border-0">
                     {{ form_field.label_tag}}
                     {{ form_field}}
                     {{ form_field.errors }}

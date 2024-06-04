@@ -3,17 +3,38 @@
 
 {% block title %}Home{% endblock title %}
 {% block css %}
+
     <link rel="stylesheet" href="{% static 'core/css/includes/post.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+    
 {% endblock css %}
 
 {% block content %}
      <section id="welcome">
         <header>
             <img src="{% static 'core/images/person.jpg' %}" alt="Atul - The Author Of The Blog" srcset="">
-            <h2>ATUL's BLOG</h2>
+            
+            <h2>
+      
+                {% if user %}
+                    {{ user.first_name }} BLOG 
+                {% endif %}
+            
+            </h2>
         </header>
+        <section>
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+                
+                    {% for message in messages  %}
+                        <h3 {% if message.tags %} class="{{message.tags}}" {% endif %} style="color: #28a745;">{{message}}</h3>    
+                        
+                    {% endfor %}
+                </div>
+            {% endif %}     
+        </section>
     </section>
+
 
     <section id="latest_posts">
         <h2>My Latest Thoughts</h2>
