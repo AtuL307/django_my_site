@@ -28,8 +28,10 @@ def post_upload_email(sender, instance, **kwargs):
     message = f"Dear {instance.author}, \n \b\b\b\b\bThanks for posting your blog \"{instance.title}\" on our website !"
     to_email = [author_email]
     
-    send_mail(subject, message, from_email=EMAIL_HOST_USER, recipient_list=to_email, fail_silently= False)
+    # send_mail(subject, message, from_email=EMAIL_HOST_USER, recipient_list=to_email, fail_silently= False)
     
+    
+    del f_name, l_name, author_email, subject, message, to_email
     
     
     

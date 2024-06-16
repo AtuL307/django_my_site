@@ -22,7 +22,7 @@
     </section>
 
     <section id="tag-form">
-        <h2>Tag</h2>
+        <h2 class="text-center my-4" style="color: #390281">Tag</h2>
         <form action="{% url 'add-tag' %}" method="POST" novalidate>
             {% csrf_token %}
             {% for form_field in tag_form  %}

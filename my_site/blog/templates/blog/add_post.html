@@ -21,7 +21,7 @@
         {% endif %}
     </section>
     <section id="add_post-form">
-        <h2>Add New Post</h2>
+        <h3 class="text-center my-4" style="color: #390281">Add New Post</h3>
         
         {% if error %}
             <div id="alert">
@@ -38,13 +38,18 @@
                     {{ form_field}}
                     {{ form_field.errors }}
                 </div>
-            {% endfor %}                
-            <button>Save Post</button>
+            {% endfor %}     
+    
+            <div  class="text-center my-4">
+                <button>Save Post</button>
+
+            </div>           
+    
         </form>
     </section>
 
     <section id="add_tag">
-        <div class="form-control border-0">
+        <div class="form-control border-0 text-center">
             <button><a href="{% url 'add-tag' %}">Add new tag</a></button>
         </div>
     </section>

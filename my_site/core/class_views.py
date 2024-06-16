@@ -1,6 +1,8 @@
 import datetime
 import secrets
 
+from . import task
+
 from .models import Post
 from django.views import View
 from django.urls import reverse
@@ -8,16 +10,17 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.views.generic.list import ListView
+from django.utils.dateparse import parse_datetime
 from core.forms import SignUpForm, EditUserProfileForm
 from django.utils.encoding import force_bytes, force_str
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from django.utils.dateparse import parse_datetime
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash, get_user_model
 
-from .signals import password_reset_mail
+# from django.contrib.auth.urls 
+# from .signals import password_reset_mail, user_logged_in_task
 
 ##########################  HOME PAGE  ##########################
    
@@ -127,7 +130,7 @@ class LogInView(View):
         
         
     def get(self, request):        
-
+        
         log_in_form = AuthenticationForm()
         return render(request, "core/login.html", context={"sign_in_form":log_in_form})
 
@@ -140,10 +143,18 @@ class LogInView(View):
             username = log_in_form.cleaned_data['username']
             password = log_in_form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
-            
-                        
+                          
             if user is not None:
                 login(request, user)
+                
+                ### Signal ###
+                # user_logged_in_task.send(sender=self.__class__, user=user)
+                
+                ### send link using Celery ###
+                task.send_login_email_to_user.delay(user_first_name=user.first_name,
+                                               user_last_name=user.last_name, 
+                                               user_email=user.email)
+
                 messages.success(request, "Login in successfully !")
                 return HttpResponseRedirect(reverse('index'))
             else:
@@ -247,8 +258,11 @@ class PasswordResetView(View):
             
             reset_link = request.build_absolute_uri(reverse("password-reset-confirm", kwargs={'uid64':uid, 'token':token}))
             
-            ### send link using signals ###
-            password_reset_mail.send(sender = self.__class__, request=request, user=user, reset_link = reset_link) 
+            ### send link using signals directly###
+            # password_reset_mail.send(sender=self.__class__, user_email=email, reset_link = reset_link)
+            
+            ### send link using Celery ###
+            task.send_email_password_reset_confirmation.delay(email=user.email, reset_link=reset_link)                
             
             messages.success(request, "Password reset link has been sent to your email address")
             return HttpResponseRedirect(reverse('password-reset'))
@@ -293,7 +307,7 @@ class PasswordResetConfirmView(View):
         
         try:    
             uid = force_str(urlsafe_base64_decode(uid64))
-            print(uid)
+            # print(uid)
             user = User.objects.get(pk=uid)
             
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
@@ -301,7 +315,7 @@ class PasswordResetConfirmView(View):
        
         if user and default_token_generator.check_token(user, token):
             new_password = request.POST.get('new_password')
-            print(new_password)
+            # print(new_password)
             user.set_password(new_password)
             user.save()
                        

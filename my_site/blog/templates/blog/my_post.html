@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}My Post{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'core/css/includes/post.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/my_post.css' %}">
+{% endblock css %}
+
+{% block content %} 
+    <section id="user-posts">
+        <h2 style="color: #390281">My Posts</h2>
+        {% if my_posts %}
+            <ul>
+                {% for post in my_posts  %}
+                    {% include "core/includes/post.html" %} 
+                {% endfor %}
+
+            </ul>
+        {% else %}
+            
+            <h3 class="text-center" style="color: #4f0ba7">No posts are posted by you !</h3>
+        {% endif %}
+
+    </section>
+{% endblock content %}

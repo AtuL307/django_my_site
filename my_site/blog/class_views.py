@@ -1,8 +1,11 @@
+from typing import Any
+
+from django.db.models.query import QuerySet
 from core.models import Post
 from django.db import IntegrityError
 from core.forms import CommentForm, PostForm,AuthorForm, TagForm
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.text import slugify
 from django.db.models.base import Model as Model
@@ -10,7 +13,7 @@ from django.views.generic import ListView
 from django.views import View
 from django.contrib import messages
 from .helper_func import data_fetch, session_stored_post
-# from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 import datetime
 
@@ -136,7 +139,8 @@ class AddPostView(View):
         if post_form.is_valid():
             
             post = post_form.save(commit=False)  
-            post.slug = slugify(post.title)                 
+            post.slug = slugify(post.title) 
+            post.user_id = request.user.id           
         
             try:
                 post.save()
@@ -223,3 +227,20 @@ class AddTagView(View):
             return HttpResponseRedirect(reverse("add-post"))
         
         return render(request, 'blog/tag.html', context={"tag_form": tag_form} )
+
+
+########################## My Post ##########################
+
+class MyPostsListView(LoginRequiredMixin, ListView):
+    
+    login_url = "/login/"
+    model = Post
+    context_object_name = 'my_posts'
+    template_name='blog/my_post.html'
+    
+    def get_queryset(self):
+        
+        user_id = self.request.user.id
+        # print("user_id:",user_id)
+        
+        return Post.objects.filter(user_id = user_id)

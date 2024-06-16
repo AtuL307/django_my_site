@@ -33,6 +33,7 @@ class Post(models.Model):
     content = models.TextField(validators=[MinLengthValidator(10)])
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="posts")
     tag = models.ManyToManyField(Tag)
+    user_id = models.CharField(max_length=50, default=1)
     
     
     def __str__(self):

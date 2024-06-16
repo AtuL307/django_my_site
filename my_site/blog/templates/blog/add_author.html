@@ -24,7 +24,7 @@
     </section>
 
     <section id="add_author-form">
-        <h2>Add New Author</h2>
+        <h3 class="text-center my-4" style="color: #390281">Add New Author</h3>
         <h3 id="mail"></h3>
         <form id="author" action="{% url 'add-author' %}" method="POST" enctype="multipart/form-data " novalidate>
             {% csrf_token %}
@@ -34,8 +34,14 @@
                     {{ form_field}}
                     {{ form_field.errors }} 
                 </div>
-            {% endfor %}                
-            <button type="submit" class="btn">Save Author</button>
+            {% endfor %} 
+
+            <div  class="text-center my-4">
+
+                <button type="submit" class="btn">Save Author</button>
+
+            </div>               
+
         </form>
     </section>
     <p id="demo"></p>

@@ -31,7 +31,7 @@ class AuthorForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        exclude = ["date", "slug"]
+        exclude = ["date", "slug", "user_id"]
         labels ={
             "title" : "Blog Title",
             "excerpt" : "Blog Excerpt",

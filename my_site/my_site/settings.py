@@ -42,12 +42,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
+    'django_celery_beat',
     'django_extensions',
     'django_ses',
+    
+    'rest_framework',
     'whitenoise.runserver_nostatic',
+    
     'storages',
     'core',
     'blog',
+    
 ]
 
 MIDDLEWARE = [
@@ -191,3 +197,16 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_NAME = 'sessionid'
 SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
 SESSION_COOKIE_HTTPONLY = True
+
+
+
+######### Celery Configuration ##########
+
+CELERY_BROKER_URL = "redis://127.0.0.1:6379"
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_EXTENDED = True
+
+CELERY_TIMEZONE = "Asia/Kolkata"
+CELERY_RESULT_BACKEND = 'django-db'

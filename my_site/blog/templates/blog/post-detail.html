@@ -48,16 +48,20 @@
             {{ post.content|linebreaks }}
         </p>
     </main>
-    <section id="comments">
-        <ul>
-            {% for comment in comments %}
-                <li>
-                    <h2>{{comment.user_name}}</h2>
-                    <p>{{comment.text|linebreaks}}</p>
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
+    
+    {% if comments %}
+        <section id="comments">
+            <ul>
+                {% for comment in comments %}
+                    <li>
+                        <h2>{{comment.user_name}}</h2>
+                        <p>{{comment.text|linebreaks}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
+
 
     <section>
         {% if comment_form.errors %}
@@ -70,7 +74,7 @@
     </section>
 
     <section id="comment-form">
-        <h2>Your Comment</h2>
+        <h3 class="text-center my-4" style="color: #390281">Your Comment</h3>
         <form  action="{% url 'postDetail-page' post.slug %}" method="POST" novalidate>
             {% csrf_token %}
             {% for form_field in comment_form  %}
@@ -80,7 +84,13 @@
                     {{ form_field.errors }}
                 </div>
             {% endfor %}
-            <button>Save Comment</button>
+            
+            <div  class="text-center my-4">
+
+                <button>Save Comment</button>
+
+            </div>
+
         </form>
     </section>
 {% endblock content %}
