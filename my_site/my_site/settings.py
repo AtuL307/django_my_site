@@ -9,11 +9,33 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-from os import getenv
-from pathlib import Path
+import json
 
+from os import getenv, path, getcwd
+from pathlib import Path
 from dotenv import load_dotenv # type: ignore
 load_dotenv()
+
+
+##########################  CONFIG  ##########################
+
+CONFIG_PATH = path.join(getcwd(), 'master')
+# print("path: ", CONFIG_PATH)
+ENVIRONMENT  = getenv('DJANGO_EVN')
+
+print("evn: ",ENVIRONMENT)
+
+if ENVIRONMENT == 'production':
+    CONFIG_FILE_PATH = path.join(CONFIG_PATH, 'config_pro.json')
+
+else:
+    CONFIG_FILE_PATH = path.join(CONFIG_PATH, 'config_dev.json')
+        
+with open(CONFIG_FILE_PATH, 'r') as config_file:
+    env_config = json.load(config_file)
+
+    print("data: ", env_config)
+    
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -150,7 +172,7 @@ USE_TZ = True
 # STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
 # STATICFILES_STORAGE = 'my_site.storage_backends.StaticStorage'
 
-# # s3 public media settings
+####### s3 public media settings #######
 # PUBLIC_MEDIA_LOCATION = 'media'
 # MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
 # DEFAULT_FILE_STORAGE = 'hello_django.storage_backends.PublicMediaStorage'
