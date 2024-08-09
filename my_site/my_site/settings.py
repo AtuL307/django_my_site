@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import json
+import logging
+import logging.handlers
 
 from os import getenv, path, getcwd
 from pathlib import Path
@@ -18,12 +20,9 @@ load_dotenv()
 
 
 ##########################  CONFIG  ##########################
-
 CONFIG_PATH = path.join(getcwd(), 'master')
 # print("path: ", CONFIG_PATH)
-ENVIRONMENT  = getenv('DJANGO_EVN')
-
-print("evn: ",ENVIRONMENT)
+ENVIRONMENT  = getenv('DJANGO_EVN', 'development')
 
 if ENVIRONMENT == 'production':
     CONFIG_FILE_PATH = path.join(CONFIG_PATH, 'config_pro.json')
@@ -33,14 +32,14 @@ else:
         
 with open(CONFIG_FILE_PATH, 'r') as config_file:
     env_config = json.load(config_file)
-
-    print("data: ", env_config)
     
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = Path.joinpath(BASE_DIR, 'templates')
 STATIC_DIR = Path.joinpath(BASE_DIR, 'static')
+LOG_FILE = Path.joinpath(BASE_DIR, 'mysite_log')
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -50,7 +49,7 @@ STATIC_DIR = Path.joinpath(BASE_DIR, 'static')
 SECRET_KEY = getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv('DEBUG')
+DEBUG = env_config['DEBUG']
 
 ALLOWED_HOSTS = []
 
@@ -113,17 +112,24 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': getenv('DB_NAME'),
-        'USER': getenv('DB_USER'),
-        'PASSWORD': getenv('DB_PASSWORD'),
-        # 'HOST': getenv('AWS_DB_HOST'),
-        'PORT': getenv('DB_PORT'),
-    }
-}
+############################## Database Configuration ##############################
 
+# Replace placeholders in the configuration with actual values from the .env file
+if ENVIRONMENT == 'production':
+    
+    env_config['DATABASE']['default']['NAME'] = getenv('AWS_DB_NAME')
+    env_config['DATABASE']['default']['USER'] = getenv('AWS_DB_USER')
+    env_config['DATABASE']['default']['PASSWORD'] = getenv('AWS_DB_PASSWORD')
+    env_config['DATABASE']['default']['HOST'] = getenv('AWS_DB_HOST')
+    env_config['DATABASE']['default']['PORT'] = getenv('AWS_DB_PORT')
+else:
+    env_config['DATABASE']['default']['NAME'] = getenv('DB_NAME')
+    env_config['DATABASE']['default']['USER'] = getenv('DB_USER')
+    env_config['DATABASE']['default']['PASSWORD'] = getenv('DB_PASSWORD')
+    env_config['DATABASE']['default']['PORT'] = getenv('DB_PORT')
+    
+    
+DATABASES = env_config['DATABASE']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -155,17 +161,27 @@ USE_I18N = True
 
 USE_TZ = True
 
-######## S3 setting ########
-# AWS_ACCESS_KEY_ID = getenv('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = getenv('AWS_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME = getenv('AWS_STORAGE_BUCKET_NAME')
-# AWS_S3_REGION_NAME = getenv('AWS_S3_REGION_NAME')
-# AWS_S3_SIGNATURE_VERSION = 's3v4'
-# AWS_DEFAULT_ACL = None
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_S3_VERIFY = True
-# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+############################## S3 setting ##############################
+if ENVIRONMENT == 'production':
+    
+    env_config['AWS_S3']['ACCESS_KEY_ID'] = getenv('AWS_ACCESS_KEY_ID')
+    env_config['AWS_S3']['SECRET_ACCESS_KEY'] = getenv('AWS_SECRET_ACCESS_KEY')
+    custom_bucket = env_config['AWS_S3']['STORAGE_BUCKET_NAME'] = getenv('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_CUSTOM_DOMAIN = env_config['AWS_S3']['S3_CUSTOM_DOMAIN'] = f"{custom_bucket}.s3.amazonaws.com"
+
+
+# AWS_S3_CONFIG = env_config['AWS_S3']
+# print(AWS_S3_CONFIG)
+    # AWS_ACCESS_KEY_ID = getenv('AWS_ACCESS_KEY_ID')
+    # AWS_SECRET_ACCESS_KEY = getenv('AWS_SECRET_ACCESS_KEY')
+    # AWS_STORAGE_BUCKET_NAME = getenv('AWS_STORAGE_BUCKET_NAME')
+    # AWS_S3_REGION_NAME = getenv('AWS_S3_REGION_NAME')
+    # AWS_S3_SIGNATURE_VERSION = 's3v4'
+    # AWS_DEFAULT_ACL = None
+    # AWS_S3_FILE_OVERWRITE = False
+    # AWS_S3_VERIFY = True
+    # AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 ######## s3 static settings ########
 # STATIC_LOCATION = 'staticfile'
@@ -193,25 +209,27 @@ STATICFILES_DIR = [STATIC_DIR]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-######### Email SMTP Configuration ##########
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_USE_SSL = False
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD")
-
-######### Email AWS SES Configuration ##########
-# EMAIL_BACKEND = 'django_ses.SESBackend'
-# AWS_ACCESS_KEY_ID = 'AKIATCKAM5LOJUV4G47Q'
-# AWS_SECRET_ACCESS_KEY = '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'
-# AWS_SES_REGION_NAME = 'ap-south-1'
-# AWS_SES_REGION_ENDPOINT = 'email.ap-south-1.amazonaws.com'
-# EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
 
 
-######### Session Configuration ##########
+############################## Email Configuration  ##############################
+
+if ENVIRONMENT == 'production':
+    
+    env_config['EMAIL']['ACCESS_KEY_ID'] = getenv('AWS_ACCESS_KEY_ID')
+    env_config['EMAIL']['SECRET_ACCESS_KEY'] = getenv('AWS_SECRET_ACCESS_KEY')
+    env_config['EMAIL']['REGION_ENDPOINT'] = getenv('AWS_SES_REGION_ENDPOINT')
+    env_config['EMAIL']['HOST_USER'] = getenv('EMAIL_HOST_USER')
+
+else:
+    env_config['EMAIL']['HOST_USER'] = getenv('EMAIL_HOST_USER')
+    env_config['EMAIL']['HOST_PASSWORD'] = getenv('EMAIL_HOST_PASSWORD')
+    
+
+EMAIL = env_config["EMAIL"] 
+
+
+############################## Session Configuration ##############################
+
 # Session engine (default is database-backed sessions)
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
@@ -222,7 +240,7 @@ SESSION_COOKIE_HTTPONLY = True
 
 
 
-######### Celery Configuration ##########
+############################## Celery Configuration ##############################
 
 CELERY_BROKER_URL = "redis://127.0.0.1:6379"
 CELERY_ACCEPT_CONTENT = ['application/json']
@@ -232,3 +250,56 @@ CELERY_RESULT_EXTENDED = True
 
 CELERY_TIMEZONE = "Asia/Kolkata"
 CELERY_RESULT_BACKEND = 'django-db'
+
+
+
+#################################### Logging Config ####################################
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters':{
+        'standard':{
+            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        },
+        'simple':{
+            'formate': '%(levelname)s - %(message)s',
+        }
+    }, 
+    'handlers': {
+        'file':{
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename':Path.joinpath(LOG_FILE, 'mysite.log') ,
+            'maxBytes': 1024*1024*10,
+            'level': 'DEBUG',
+            'formatter': 'standard',
+            'backupCount': 2
+            
+        },
+        'console':{
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG',
+            'formatter': 'standard'
+            
+        },
+    },
+    
+    'loggers':{
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'blog':{
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'core':{
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+            
+    },
+}

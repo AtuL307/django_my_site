@@ -1,5 +1,24 @@
 {
     "cSpell.words": [
         "dotenv",
+        "levelname",
+        "nostatic",
+        "whitenoise"
+    ],
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "database": "mysite",
+            "username": "root",
+            "name": "mysite",
+            "password": "AtuL#2568"
+        }
     ]
 }

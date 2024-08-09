@@ -1,5 +1,26 @@
 
-
 {
-    "DEBUG": "True"
+    "DEBUG": "True",
+
+    "DATABASE": { 
+        "default" : {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": "DB_NAME",
+            "USER": "DB_USER",
+            "PASSWORD": "DB_PASSWORD",
+            "PORT": "DB_PORT"
+        }
+    },
+
+    "EMAIL": {
+
+        "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
+        "HOST": "smtp.gmail.com",
+        "USE_SSL":  "False",
+        "USE_TLS": "True",
+        "PORT": "587",
+        "HOST_USER": "EMAIL_HOST_USER",
+        "HOST_PASSWORD": "EMAIL_HOST_PASSWORD"
+    }
+
 }

@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import Signal, receiver
 from django.core.mail import send_mail
 
-from my_site.settings import EMAIL_HOST_USER
+from my_site.settings import EMAIL
 from core.models import Author, Post
 
     
@@ -28,7 +28,7 @@ def post_upload_email(sender, instance, **kwargs):
     message = f"Dear {instance.author}, \n \b\b\b\b\bThanks for posting your blog \"{instance.title}\" on our website !"
     to_email = [author_email]
     
-    # send_mail(subject, message, from_email=EMAIL_HOST_USER, recipient_list=to_email, fail_silently= False)
+    #send_mail(subject, message, from_email=EMAIL, recipient_list=to_email, fail_silently= False)
     
     
     del f_name, l_name, author_email, subject, message, to_email

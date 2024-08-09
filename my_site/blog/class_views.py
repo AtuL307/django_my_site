@@ -1,3 +1,4 @@
+import logging
 from typing import Any
 
 from django.db.models.query import QuerySet
@@ -6,7 +7,7 @@ from django.db import IntegrityError
 from core.forms import CommentForm, PostForm,AuthorForm, TagForm
 from django.urls import reverse
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404 
 from django.utils.text import slugify
 from django.db.models.base import Model as Model
 from django.views.generic import ListView
@@ -16,6 +17,8 @@ from .helper_func import data_fetch, session_stored_post
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 import datetime
+
+logger = logging.getLogger(__name__) 
 
 ##########################  All Post  ##########################
 

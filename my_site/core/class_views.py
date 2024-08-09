@@ -1,6 +1,6 @@
 import datetime
 import secrets
-
+import logging
 from . import task
 
 from .models import Post
@@ -21,6 +21,8 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 
 # from django.contrib.auth.urls 
 # from .signals import password_reset_mail, user_logged_in_task
+
+logger = logging.getLogger(__name__) 
 
 ##########################  HOME PAGE  ##########################
    
@@ -84,6 +86,7 @@ class SignUpView(View):
 ##########################  USER PROFILE  ##########################
 
 class MyAccountView(View):
+
     """
         dispatch() allows you to customize the request handling before it reaches 
         the actual view method (like get() or post()) .
@@ -143,22 +146,34 @@ class LogInView(View):
             username = log_in_form.cleaned_data['username']
             password = log_in_form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
-                          
+
             if user is not None:
                 login(request, user)
+                
+                logger.info(f"{username} user successfully authenticate!!" )           
                 
                 ### Signal ###
                 # user_logged_in_task.send(sender=self.__class__, user=user)
                 
                 ### send link using Celery ###
-                task.send_login_email_to_user.delay(user_first_name=user.first_name,
+                try:
+                    task.send_login_email_to_user.delay(user_first_name=user.first_name,
                                                user_last_name=user.last_name, 
                                                user_email=user.email)
+                
+                    logger.info(f"Celery task: For send email to user {username} for successfully login " )           
+                
+                except :
+                    logger.info(f"Celery task: For user {username} for successfully login was not send" )           
+                    
+                
 
                 messages.success(request, "Login in successfully !")
                 return HttpResponseRedirect(reverse('index'))
             else:
                 messages.error(request, "Failed to log in")
+                logger.info(f"{username} user failed to authenticate!!" )           
+                
                 
                 
         return render(request, "core/login.html", context={"sign_in_form":log_in_form})
@@ -181,7 +196,9 @@ class LogOutView(View):
     
     def get(self, request):
         
+        logger.info(f"{self.request.user.username} user successfully logout!!" )           
         logout(request)
+        
         messages.success(request, "Successfully Logout !")
         return HttpResponseRedirect(reverse("index"))
 
@@ -242,7 +259,7 @@ class PasswordResetView(View):
         try :
             
             user = User.objects.get(email = email)
-
+            
         except User.DoesNotExist:
             messages.error(request, 'User with this email address does not exist.')
         

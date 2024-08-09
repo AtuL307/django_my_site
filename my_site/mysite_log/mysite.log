@@ -1,0 +1,208 @@
+2024-07-26 18:51:34,603 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 18:51:39,270 - django.server - INFO - "GET / HTTP/1.1" 200 3712
+2024-07-26 18:54:26,658 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 18:54:32,165 - django.server - INFO - "GET /login/ HTTP/1.1" 200 2647
+2024-07-26 18:54:41,425 - django.request - ERROR - Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py", line 130, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py", line 153, in post
+    logger.info("user successfully authenticate!!:", user['username'])
+                                          ~~~~^^^^^^^^^^^^
+TypeError: 'User' object is not subscriptable
+2024-07-26 18:54:41,433 - django.server - ERROR - "POST /login/ HTTP/1.1" 500 88053
+2024-07-26 18:54:46,627 - django.server - INFO - "GET /login/ HTTP/1.1" 200 2647
+2024-07-26 18:55:20,185 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 18:55:21,590 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 18:55:28,791 - django.server - INFO - "GET /login/ HTTP/1.1" 200 2647
+2024-07-26 18:55:38,245 - django.server - INFO - "POST /login/ HTTP/1.1" 302 0
+2024-07-26 18:55:38,270 - django.server - INFO - "GET / HTTP/1.1" 200 4909
+2024-07-26 18:56:49,077 - django.server - INFO - "GET /blog/posts/programing-is-great/ HTTP/1.1" 200 5445
+2024-07-26 18:57:29,561 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 18:57:31,084 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 18:57:36,480 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 18:57:37,961 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 18:57:40,748 - django.server - INFO - "GET /MyAccount/logout/ HTTP/1.1" 302 0
+2024-07-26 18:57:40,771 - django.server - INFO - "GET / HTTP/1.1" 200 3996
+2024-07-26 18:58:39,687 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 18:58:41,133 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 18:59:30,306 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 18:59:31,626 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 18:59:41,230 - django.server - INFO - "GET /login/ HTTP/1.1" 200 2647
+2024-07-26 18:59:52,146 - django.server - INFO - "POST /login/ HTTP/1.1" 302 0
+2024-07-26 18:59:52,179 - django.server - INFO - "GET / HTTP/1.1" 200 4909
+2024-07-26 19:00:34,686 - django.request - ERROR - Internal Server Error: /MyAccount/logout/
+Traceback (most recent call last):
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py", line 185, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py", line 192, in get
+    logger.info(f"{request.user["username"]} user not authenticate!!" )
+        ~~~~~~~~~~~~^^^^^^^^^^^^
+TypeError: 'AnonymousUser' object is not subscriptable
+2024-07-26 19:00:34,689 - django.server - ERROR - "GET /MyAccount/logout/ HTTP/1.1" 500 86212
+2024-07-26 19:01:24,023 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\my_site\settings.py changed, reloading.
+2024-07-26 19:01:25,441 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 19:02:08,757 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 19:02:10,301 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 19:02:16,804 - django.server - INFO - "GET / HTTP/1.1" 200 3712
+2024-07-26 19:02:22,133 - django.server - INFO - "GET /login/ HTTP/1.1" 200 2647
+2024-07-26 19:02:31,667 - core.class_views - INFO - admin user successfully authenticate!!
+2024-07-26 19:02:31,908 - django.server - INFO - "POST /login/ HTTP/1.1" 302 0
+2024-07-26 19:02:31,928 - django.server - INFO - "GET / HTTP/1.1" 200 4909
+2024-07-26 19:02:59,085 - django.request - ERROR - Internal Server Error: /MyAccount/logout/
+Traceback (most recent call last):
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py", line 185, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py", line 191, in get
+    logger.info(f"{request.user["username"]} user not authenticate!!" )
+        ~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\utils\functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'User' object is not subscriptable
+2024-07-26 19:02:59,089 - django.server - ERROR - "GET /MyAccount/logout/ HTTP/1.1" 500 90704
+2024-07-26 19:03:50,548 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 19:03:51,944 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 19:04:16,654 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 19:04:18,206 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 19:04:22,852 - django.request - ERROR - Internal Server Error: /MyAccount/logout/
+Traceback (most recent call last):
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py", line 185, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py", line 191, in get
+    logger.info(f"{self.request.user["username"]} user not authenticate!!" )
+        ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\venv\Lib\site-packages\django\utils\functional.py", line 253, in inner
+    return func(_wrapped, *args)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'User' object is not subscriptable
+2024-07-26 19:04:22,856 - django.server - ERROR - "GET /MyAccount/logout/ HTTP/1.1" 500 90729
+2024-07-26 19:05:52,300 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 19:05:53,827 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 19:05:59,226 - django.server - INFO - "GET / HTTP/1.1" 200 4623
+2024-07-26 19:06:03,464 - core.class_views - INFO - admin user not authenticate!!
+2024-07-26 19:06:03,484 - django.server - INFO - "GET /MyAccount/logout/ HTTP/1.1" 302 0
+2024-07-26 19:06:03,503 - django.server - INFO - "GET / HTTP/1.1" 200 3996
+2024-07-26 19:06:34,666 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 19:06:36,046 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 19:08:26,968 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 19:08:28,388 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 19:10:36,325 - django.utils.autoreload - INFO - C:\Users\www22\OneDrive\Desktop\Python\Django\project\django_my_site\my_site\core\class_views.py changed, reloading.
+2024-07-26 19:10:37,643 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-07-26 19:20:24,374 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 18:29:59,926 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 18:30:16,483 - django.server - INFO - "GET / HTTP/1.1" 200 3712
+2024-08-07 18:30:16,690 - django.server - INFO - "GET /static/core/css/core.css HTTP/1.1" 200 800
+2024-08-07 18:30:16,715 - django.server - INFO - "GET /static/core/css/index.css HTTP/1.1" 200 1300
+2024-08-07 18:30:16,722 - django.server - INFO - "GET /posts-media-files/posts/OIP_5MXIlvG.jpeg HTTP/1.1" 200 22045
+2024-08-07 18:30:16,724 - django.server - INFO - "GET /static/core/css/includes/post.css HTTP/1.1" 200 694
+2024-08-07 18:30:16,735 - django.server - INFO - "GET /posts-media-files/posts/mountain_mtaklik.jpg HTTP/1.1" 200 217230
+2024-08-07 18:30:16,736 - django.server - INFO - "GET /static/core/images/person.jpg HTTP/1.1" 200 657939
+2024-08-07 18:30:16,746 - django.server - INFO - "GET /posts-media-files/posts/coding.png HTTP/1.1" 200 262435
+2024-08-07 18:30:18,080 - django.request - WARNING - Not Found: /favicon.ico
+2024-08-07 18:30:18,081 - django.server - WARNING - "GET /favicon.ico HTTP/1.1" 404 3993
+2024-08-07 18:30:42,637 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\blog\class_views.py changed, reloading.
+2024-08-07 18:30:44,382 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 18:32:55,972 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\blog\signals.py changed, reloading.
+2024-08-07 18:32:57,662 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 18:34:36,859 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\core\signals.py changed, reloading.
+2024-08-07 18:34:38,392 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 19:02:40,667 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 19:02:46,088 - django.server - INFO - "GET / HTTP/1.1" 200 3712
+2024-08-07 19:05:34,486 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\blog\signals.py changed, reloading.
+2024-08-07 19:05:34,537 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\blog\signals.py changed, reloading.
+2024-08-07 19:05:37,297 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 19:05:37,391 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 19:06:18,755 - django.server - INFO - "GET /login/ HTTP/1.1" 200 2647
+2024-08-07 19:06:18,906 - django.server - INFO - "GET /static/core/css/includes/alert.css HTTP/1.1" 200 623
+2024-08-07 19:06:18,907 - django.server - INFO - "GET /static/core/css/login.css HTTP/1.1" 200 1234
+2024-08-07 19:06:24,256 - django.server - INFO - "GET /signup/ HTTP/1.1" 200 3850
+2024-08-07 19:06:24,301 - django.server - INFO - "GET /static/core/css/signup.css HTTP/1.1" 200 1052
+2024-08-07 19:06:27,486 - django.server - INFO - "GET /login/ HTTP/1.1" 200 2647
+2024-08-07 19:06:37,900 - core.class_views - INFO - admin user successfully authenticate!!
+2024-08-07 19:06:38,045 - core.class_views - INFO - Celery task: For send email to user admin for successfully login 
+2024-08-07 19:06:38,058 - django.server - INFO - "POST /login/ HTTP/1.1" 302 0
+2024-08-07 19:06:38,083 - django.server - INFO - "GET / HTTP/1.1" 200 4909
+2024-08-07 19:06:51,304 - django.server - INFO - "GET /blog/my-posts/ HTTP/1.1" 200 3461
+2024-08-07 19:06:51,366 - django.server - INFO - "GET /static/blog/css/my_post.css HTTP/1.1" 200 741
+2024-08-07 19:06:51,375 - django.server - INFO - "GET /posts-media-files/posts/maldivas.jpg HTTP/1.1" 200 619744
+2024-08-07 19:06:54,352 - django.server - INFO - "GET /blog/posts/programing-is-great/ HTTP/1.1" 200 5445
+2024-08-07 19:06:54,396 - django.server - INFO - "GET /static/blog/css/post_detail.css HTTP/1.1" 200 3025
+2024-08-07 19:07:13,389 - django.server - INFO - "POST /blog/posts/programing-is-great/ HTTP/1.1" 302 0
+2024-08-07 19:07:13,414 - django.server - INFO - "GET /blog/posts/programing-is-great/ HTTP/1.1" 200 5703
+2024-08-07 19:07:18,961 - django.server - INFO - "GET /blog/read-later/ HTTP/1.1" 200 2319
+2024-08-07 19:07:19,022 - django.server - INFO - "GET /static/blog/css/store_post.css HTTP/1.1" 200 717
+2024-08-07 19:07:20,915 - django.server - INFO - "GET /blog/add-post/ HTTP/1.1" 200 5061
+2024-08-07 19:07:20,960 - django.server - INFO - "GET /static/blog/css/add_post.css HTTP/1.1" 200 1572
+2024-08-07 19:07:25,647 - django.server - INFO - "GET /blog/add-author/ HTTP/1.1" 200 3812
+2024-08-07 19:07:25,709 - django.server - INFO - "GET /static/blog/js/add_author.js HTTP/1.1" 200 385
+2024-08-07 19:07:25,709 - django.server - INFO - "GET /static/blog/css/add_author.css HTTP/1.1" 200 1055
+2024-08-07 19:07:26,881 - django.server - INFO - "GET /blog/posts/ HTTP/1.1" 200 4444
+2024-08-07 19:07:26,947 - django.server - INFO - "GET /static/blog/css/all_post.css HTTP/1.1" 200 739
+2024-08-07 19:07:35,787 - core.class_views - INFO - admin user successfully logout!!
+2024-08-07 19:07:35,801 - django.server - INFO - "GET /MyAccount/logout/ HTTP/1.1" 302 0
+2024-08-07 19:07:35,830 - django.server - INFO - "GET / HTTP/1.1" 200 3996
+2024-08-07 19:12:55,975 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\core\signals.py changed, reloading.
+2024-08-07 19:12:56,077 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\core\signals.py changed, reloading.
+2024-08-07 19:12:56,992 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 19:12:57,099 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 19:16:32,650 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\core\signals.py changed, reloading.
+2024-08-07 19:16:32,651 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\core\signals.py changed, reloading.
+2024-08-07 19:16:33,798 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 19:16:33,825 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 19:21:45,317 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\core\signals.py changed, reloading.
+2024-08-07 19:21:45,323 - django.utils.autoreload - INFO - C:\Users\www22\Desktop\Python\Django\project\django_my_site\my_site\core\signals.py changed, reloading.
+2024-08-07 19:21:46,272 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2024-08-07 19:21:46,276 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
